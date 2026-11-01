@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -95,16 +95,18 @@ function Creator({
       .then(setAppleAvailable)
       .catch(() => {});
   }, []);
+  const wasGenerating = useRef(generating);
   useEffect(() => {
     if (
+      wasGenerating.current &&
       studio.job?.status === "complete" &&
-      studio.job.app_id &&
-      studio.job.id === studio.lastRequestedId
+      studio.job.app_id
     ) {
       setId(studio.job.app_id);
       setPrompt("");
     }
-  }, [studio.job?.status, studio.job?.id, studio.lastRequestedId]);
+    wasGenerating.current = studio.job?.status === "pending";
+  }, [studio.job?.status, studio.job?.id]);
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -349,7 +351,7 @@ function Main() {
           }
         >
           <Text style={s.eyebrow}>A HOME FOR YOUR IDEAS</Text>
-          <Text style={s.homeTitle}>Little apps.\nEndless possibilities.</Text>
+          <Text style={s.homeTitle}>{"Little apps.\nEndless possibilities."}</Text>
           <Text style={s.subtitle}>Imagine it. Make it. Make it yours.</Text>
           <View style={s.hero}>
             <Image
