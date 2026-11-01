@@ -1,0 +1,5 @@
+{
+  "method": "Original editable SVG artwork rendered with Sharp; no third-party icons or generated UI",
+  "icon": "assets/icon.svg",
+  "renderer": "scripts/render-assets.mjs"
+}

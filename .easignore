@@ -1,0 +1,17 @@
+.git
+node_modules
+.expo
+ios
+android
+.env*
+.qa*
+*.p8
+*.p12
+*.mobileprovision
+credentials.json
+app-store
+artifacts
+supabase
+server
+tests
+docs

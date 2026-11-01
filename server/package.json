@@ -1,0 +1,16 @@
+{
+  "name": "anything-app-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.99.0",
+    "express": "^5.1.0"
+  }
+}

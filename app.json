@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Anything App",
+    "slug": "anything-app",
+    "owner": "jjohnson5253",
+    "version": "1.0.0",
+    "scheme": "anythingapp",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "backgroundColor": "#F7F8FC",
+    "ios": {
+      "bundleIdentifier": "com.forreallabs.anythingapp",
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDisplayName": "Anything App"
+      },
+      "usesAppleSignIn": true,
+      "associatedDomains": [
+        "applinks:app-api-production-e73b.up.railway.app"
+      ]
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font",
+      "expo-secure-store",
+      "expo-apple-authentication"
+    ],
+    "web": {
+      "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b6b3bb9f-8ad1-4e93-beb7-d297bc03e6d7"
+      }
+    }
+  }
+}
