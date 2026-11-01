@@ -12,8 +12,25 @@ const app = express();
 app.disable("x-powered-by");
 app.use(express.json({ limit: "64kb" }));
 app.get("/health", (_req, res) => res.json({ ok: true }));
-app.get('/.well-known/apple-app-site-association', (_req,res)=>res.json({applinks:{details:[{appIDs:['F3M935826C.com.forreallabs.anythingapp'],components:[{'/':'/apps/*'}]}]}}));
-app.get('/apps/:id', (req,res)=>res.type('html').send('<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anything App</title><body style="font:20px system-ui;padding:40px;background:#F7F8FC"><h1>Your private app.</h1><p>Open Anything App and sign in to the account that owns this app. You’ll find it in your library.</p><a href="https://for-real-labs.github.io/anything-app/">About Anything App</a></body>'));
+app.get("/.well-known/apple-app-site-association", (_req, res) =>
+  res.json({
+    applinks: {
+      details: [
+        {
+          appIDs: ["F3M935826C.com.forreallabs.anythingapp"],
+          components: [{ "/": "/apps/*" }],
+        },
+      ],
+    },
+  })
+);
+app.get("/apps/:id", (req, res) =>
+  res
+    .type("html")
+    .send(
+      '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anything App</title><body style="font:20px system-ui;padding:40px;background:#F7F8FC"><h1>Your private app.</h1><p>Open Anything App and sign in to the account that owns this app. You’ll find it in your library.</p><a href="https://for-real-labs.github.io/anything-app/">About Anything App</a></body>'
+    )
+);
 app.use(async (req, res, next) => {
   try {
     const token = req.headers.authorization?.match(/^Bearer (.+)$/)?.[1];
@@ -64,29 +81,84 @@ app.get("/me", async (req, res) => {
       : account
   );
 });
-app.post('/account/age', async(req,res)=>{
- if(req.body.adult!==true)return res.status(400).json({error:'You must be 18 or older to create apps.'});
- check(await db.rpc('ensure_app_account',{uid:req.user.id}));
- check(await db.from('app_accounts').update({adult_declared_at:new Date().toISOString()}).eq('user_id',req.user.id));
- res.json({ok:true});
+app.post("/account/age", async (req, res) => {
+  if (req.body.adult !== true)
+    return res
+      .status(400)
+      .json({ error: "You must be 18 or older to create apps." });
+  check(await db.rpc("ensure_app_account", { uid: req.user.id }));
+  check(
+    await db
+      .from("app_accounts")
+      .update({ adult_declared_at: new Date().toISOString() })
+      .eq("user_id", req.user.id)
+  );
+  res.json({ ok: true });
 });
-app.post('/reports', async(req,res)=>{
- const {appId,reason}=req.body;
- if(!uuid(appId)||typeof reason!=='string'||!reason.trim()||reason.length>2000)return res.status(400).json({error:'Invalid report.'});
- const own=check(await db.from('created_apps').select('id').eq('id',appId).eq('user_id',req.user.id).maybeSingle());
- if(!own)return res.status(404).json({error:'App not found.'});
- const recent=check(await db.from('app_reports').select('id').eq('user_id',req.user.id).gte('created_at',new Date(Date.now()-86400000).toISOString()));
- if(recent.length>=10)return res.status(429).json({error:'Report limit reached. Please contact support.'});
- check(await db.from('app_reports').insert({user_id:req.user.id,app_id:appId,reason:reason.trim()}));
- res.json({ok:true});
+app.post("/reports", async (req, res) => {
+  const { appId, reason } = req.body;
+  if (
+    !uuid(appId) ||
+    typeof reason !== "string" ||
+    !reason.trim() ||
+    reason.length > 2000
+  )
+    return res.status(400).json({ error: "Invalid report." });
+  const own = check(
+    await db
+      .from("created_apps")
+      .select("id")
+      .eq("id", appId)
+      .eq("user_id", req.user.id)
+      .maybeSingle()
+  );
+  if (!own) return res.status(404).json({ error: "App not found." });
+  const recent = check(
+    await db
+      .from("app_reports")
+      .select("id")
+      .eq("user_id", req.user.id)
+      .gte("created_at", new Date(Date.now() - 86400000).toISOString())
+  );
+  if (recent.length >= 10)
+    return res
+      .status(429)
+      .json({ error: "Report limit reached. Please contact support." });
+  check(
+    await db
+      .from("app_reports")
+      .insert({ user_id: req.user.id, app_id: appId, reason: reason.trim() })
+  );
+  res.json({ ok: true });
 });
-app.delete('/apps/:id', async(req,res)=>{
- if(!uuid(req.params.id))return res.status(400).json({error:'Invalid app.'});
- const pending=check(await db.from('app_jobs').select('id').eq('app_id',req.params.id).eq('user_id',req.user.id).eq('status','pending'));
- if(pending.length)return res.status(409).json({error:'Wait for the update to finish before deleting this app.'});
- const removed=check(await db.from('created_apps').delete().eq('id',req.params.id).eq('user_id',req.user.id).select('id').maybeSingle());
- if(!removed)return res.status(404).json({error:'App not found.'});
- res.json({ok:true});
+app.delete("/apps/:id", async (req, res) => {
+  if (!uuid(req.params.id))
+    return res.status(400).json({ error: "Invalid app." });
+  const pending = check(
+    await db
+      .from("app_jobs")
+      .select("id")
+      .eq("app_id", req.params.id)
+      .eq("user_id", req.user.id)
+      .eq("status", "pending")
+  );
+  if (pending.length)
+    return res
+      .status(409)
+      .json({
+        error: "Wait for the update to finish before deleting this app.",
+      });
+  const removed = check(
+    await db
+      .from("created_apps")
+      .delete()
+      .eq("id", req.params.id)
+      .eq("user_id", req.user.id)
+      .select("id")
+      .maybeSingle()
+  );
+  if (!removed) return res.status(404).json({ error: "App not found." });
+  res.json({ ok: true });
 });
 app.get("/apps", async (req, res) =>
   res.json(
@@ -155,15 +227,22 @@ async function run(job) {
     console.error("Generation failed", job.id, e.message);
     await db.rpc("fail_app_job", {
       jid: job.id,
-      reason: e.message?.startsWith("CONTENT_REFUSED:") ? "This request can’t be created. Try a different idea. Your credit was returned." : "Couldn’t finish this app. Your credit was returned.",
+      reason: e.message?.startsWith("CONTENT_REFUSED:")
+        ? "This request can’t be created. Try a different idea. Your credit was returned."
+        : "Couldn’t finish this app. Your credit was returned.",
     });
   } finally {
     running.delete(job.id);
   }
 }
 app.post("/generateApp", async (req, res) => {
-  const account = check(await db.rpc('ensure_app_account',{uid:req.user.id}));
-  if(!account.adult_declared_at)return res.status(403).json({error:'Confirm you are 18 or older before creating apps.'});
+  const account = check(
+    await db.rpc("ensure_app_account", { uid: req.user.id })
+  );
+  if (!account.adult_declared_at)
+    return res
+      .status(403)
+      .json({ error: "Confirm you are 18 or older before creating apps." });
   const { requestId, appId = null, prompt } = req.body;
   if (
     !uuid(requestId) ||

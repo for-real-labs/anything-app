@@ -27,10 +27,15 @@ export async function generateApp(
       tools: [
         {
           name: "deliver_app",
-          description: "Return the complete working app, or explain why a request is inappropriate.",
+          description:
+            "Return the complete working app, or explain why a request is inappropriate.",
           input_schema: {
             type: "object",
-            properties: { title: { type: "string" }, html: { type: "string" }, refusal: { type: "string" } },
+            properties: {
+              title: { type: "string" },
+              html: { type: "string" },
+              refusal: { type: "string" },
+            },
             required: ["title", "html"],
             additionalProperties: false,
           },
@@ -44,7 +49,8 @@ export async function generateApp(
   const app = data.content?.find(
     (b) => b.type === "tool_use" && b.name === "deliver_app"
   )?.input;
-  if (app?.refusal) throw new Error("CONTENT_REFUSED: " + String(app.refusal).slice(0, 180));
+  if (app?.refusal)
+    throw new Error("CONTENT_REFUSED: " + String(app.refusal).slice(0, 180));
   if (
     data.stop_reason === "max_tokens" ||
     !app ||

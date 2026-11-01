@@ -82,10 +82,7 @@ export function useStudio() {
         nonce
       );
       const credential = await Apple.signInAsync({
-        requestedScopes: [
-          Apple.AppleAuthenticationScope.EMAIL,
-          Apple.AppleAuthenticationScope.FULL_NAME,
-        ],
+        requestedScopes: [Apple.AppleAuthenticationScope.EMAIL],
         nonce: hashed,
       });
       if (!credential.identityToken)
@@ -113,9 +110,23 @@ export function useStudio() {
     const requestKey = `anything.request.${uid}`;
     try {
       if (!account?.adult_declared_at) {
-        const adult = await new Promise<boolean>(resolve => Alert.alert('Create with AI · 18+', 'AI can create a wide range of content. You must be 18 or older to create and use generated apps.', [{text:'Cancel',style:'cancel',onPress:()=>resolve(false)},{text:'I’m 18 or older',onPress:()=>resolve(true)}], {cancelable:true,onDismiss:()=>resolve(false)}));
+        const adult = await new Promise<boolean>((resolve) =>
+          Alert.alert(
+            "Create with AI · 18+",
+            "AI can create a wide range of content. You must be 18 or older to create and use generated apps.",
+            [
+              {
+                text: "Cancel",
+                style: "cancel",
+                onPress: () => resolve(false),
+              },
+              { text: "I’m 18 or older", onPress: () => resolve(true) },
+            ],
+            { cancelable: true, onDismiss: () => resolve(false) }
+          )
+        );
         if (!adult) return;
-        await api('/account/age', {adult: true});
+        await api("/account/age", { adult: true });
       }
       const consentKey = `anything.ai-consent.${uid}`;
       if (!(await AsyncStorage.getItem(consentKey))) {
@@ -145,7 +156,10 @@ export function useStudio() {
           : { requestId: Crypto.randomUUID(), prompt, appId: appId ?? null };
       await AsyncStorage.setItem(requestKey, JSON.stringify(payload));
       const result = await api<Job>("/generateApp", payload);
-      if (user.current === uid) { setJob(result); setLastRequestedId(result.id); }
+      if (user.current === uid) {
+        setJob(result);
+        setLastRequestedId(result.id);
+      }
       await AsyncStorage.removeItem(requestKey);
       await refresh();
     } catch (e) {
@@ -167,12 +181,29 @@ export function useStudio() {
     }
   }
   async function report(appId: string) {
-    try { await api('/reports', {appId, reason: 'Problem or inappropriate generated content'}); Alert.alert('Report received', 'We’ll review this app. You can remove it from your library.'); }
-    catch (e) { Alert.alert('Couldn’t send report', (e as Error).message); }
+    try {
+      await api("/reports", {
+        appId,
+        reason: "Problem or inappropriate generated content",
+      });
+      Alert.alert(
+        "Report received",
+        "We’ll review this app. You can remove it from your library."
+      );
+    } catch (e) {
+      Alert.alert("Couldn’t send report", (e as Error).message);
+    }
   }
   async function remove(appId: string) {
-    try { await api(`/apps/${appId}`, undefined, 'DELETE'); await AsyncStorage.removeItem(`anything.data.${user.current}.${appId}`); await refresh(); return true; }
-    catch(e) { setError((e as Error).message); return false; }
+    try {
+      await api(`/apps/${appId}`, undefined, "DELETE");
+      await AsyncStorage.removeItem(`anything.data.${user.current}.${appId}`);
+      await refresh();
+      return true;
+    } catch (e) {
+      setError((e as Error).message);
+      return false;
+    }
   }
   async function withdrawConsent() {
     await AsyncStorage.removeItem(`anything.ai-consent.${user.current}`);
@@ -189,7 +220,13 @@ export function useStudio() {
     try {
       await api("/account", undefined, "DELETE");
       const uid = user.current;
-      const keys = (await AsyncStorage.getAllKeys()).filter(key => key === `anything.apps.${uid}` || key === `anything.request.${uid}` || key === `anything.ai-consent.${uid}` || key.startsWith(`anything.data.${uid}.`));
+      const keys = (await AsyncStorage.getAllKeys()).filter(
+        (key) =>
+          key === `anything.apps.${uid}` ||
+          key === `anything.request.${uid}` ||
+          key === `anything.ai-consent.${uid}` ||
+          key.startsWith(`anything.data.${uid}.`)
+      );
       await AsyncStorage.multiRemove(keys);
       await auth?.auth.signOut({ scope: "local" });
     } catch (e) {

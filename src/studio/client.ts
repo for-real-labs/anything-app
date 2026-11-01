@@ -72,4 +72,8 @@ export type Job = {
   status: "pending" | "complete" | "failed";
   error: string | null;
 };
-export type Account = { credits: number; unlimited: boolean; adult_declared_at: string | null };
+export type Account = {
+  credits: number;
+  unlimited: boolean;
+  adult_declared_at: string | null;
+};

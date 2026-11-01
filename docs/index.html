@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Anything App — create, use, and save your own mini apps with AI."
+    />
+    <title>Anything App · Create your own little apps</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f7f8fc;
+        color: #24233c;
+        font: 17px/1.65 -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      }
+      main {
+        max-width: 800px;
+        margin: auto;
+        padding: 70px 28px;
+      }
+      img {
+        width: 110px;
+        border-radius: 26px;
+      }
+      h1 {
+        font-size: 52px;
+        line-height: 1.08;
+        letter-spacing: -2px;
+      }
+      h2 {
+        font-size: 27px;
+        margin-top: 48px;
+        letter-spacing: -0.6px;
+      }
+      a {
+        color: #7162da;
+      }
+      header p {
+        font-size: 21px;
+        color: #77758a;
+      }
+      .tag {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #7162da;
+      }
+      .box {
+        background: white;
+        border: 1px solid #e4e4ed;
+        border-radius: 24px;
+        padding: 28px;
+        margin: 30px 0;
+      }
+      li {
+        margin: 8px 0;
+      }
+      footer {
+        font-size: 13px;
+        color: #77758a;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="icon.png" alt="Nine colorful mini app icons" />
+        <p class="tag">A HOME FOR YOUR IDEAS</p>
+        <h1>Little apps.<br />Endless possibilities.</h1>
+        <p>
+          Describe an idea. Make it real.<br />Keep your favorite little apps,
+          all in Anything App.
+        </p>
+      </header>
+      <div class="box">
+        <strong>Anything App for iPhone and iPad</strong>
+        <p>
+          Create useful tools, trackers, journals, calculators, and playful
+          experiments with AI. Open them, revise them, and save them to your
+          private library.
+        </p>
+        <p>
+          Three starter apps work without signing in. Creation uses Sign in with
+          Apple, includes 10 free credits, and is for adults 18 and older. Each
+          creation or revision uses one credit; failed generations return it. No
+          subscriptions, purchases, ads, or analytics.
+        </p>
+        <p>
+          Mini apps run inside Anything App. Native features such as camera,
+          contacts, notifications, and payments are unavailable. App source
+          syncs to your account; data entered inside each app stays on your
+          device.
+        </p>
+      </div>
+      <h2 id="support">Support</h2>
+      <p>
+        Need help, want to report inappropriate content, or have a question?
+        Email
+        <a href="mailto:jakejohnson3700@gmail.com">jakejohnson3700@gmail.com</a
+        >. Include the app name and a short description. You can also use
+        <strong>Report a problem</strong> while viewing a created app. Reports
+        are reviewed as soon as possible.
+      </p>
+      <p>
+        To remove an app, open it and tap Delete app. To delete your account and
+        its cloud data, open Settings → Delete account. Account deletion
+        permanently removes your apps, prompts, jobs, and credits. You can also
+        contact support for deletion assistance.
+      </p>
+      <h2 id="privacy">Privacy policy</h2>
+      <p>
+        Effective November 1, 2026. Anything App is operated by Jake Johnson.
+      </p>
+      <ul>
+        <li>
+          <strong>Account data:</strong> Sign in with Apple supplies an account
+          identifier and email (which may be an Apple private relay). Supabase
+          stores this information to authenticate you, keep your private app
+          library, and manage generation credits. The app requests email only;
+          it does not request your name.
+        </li>
+        <li>
+          <strong>App creation:</strong> Your prompts, generated
+          HTML/CSS/JavaScript, titles, revisions, generation status, declared
+          adult status, and credits are stored in Supabase and processed by our
+          Railway backend. Your source is private to your account.
+        </li>
+        <li>
+          <strong>AI provider:</strong> With your permission, your prompt and
+          existing source for revisions are sent to Anthropic to generate your
+          app. This can include any personal information you put in them. Your
+          Apple credentials are never sent to Anthropic. Avoid including secrets
+          or sensitive personal data. You may withdraw permission in Settings;
+          we will ask again before another generation. Anthropic processes API
+          data under its commercial terms and retention policies, including any
+          applicable abuse-monitoring retention.
+        </li>
+        <li>
+          <strong>On-device data:</strong> Saved app source is cached per
+          account. Each mini app has its own local storage, capped at 200 KB.
+          Data entered inside mini apps is not synced by Anything App and may be
+          lost if the app or device data is removed. Mini apps receive no Apple
+          identity, account tokens, or native device permissions.
+        </li>
+        <li>
+          <strong>Online assets:</strong> A created app may use HTTPS libraries,
+          images, or online resources. Those providers receive network
+          information such as IP addresses when the resources load. Creation
+          instructions prohibit trackers and transmitting entered data to
+          external services; generated output may contain mistakes. Inspect
+          source using the code button and report problems.
+        </li>
+        <li>
+          <strong>Reports and support:</strong> A submitted report includes your
+          account ID, app reference, reason, and timestamp. Support emails
+          include what you choose to send. These are used to investigate issues.
+        </li>
+        <li>
+          <strong>Retention and deletion:</strong> Account data and cloud app
+          source remain until you delete them or your account. Account deletion
+          removes associated cloud records and cached app data on the device
+          used to delete it. Temporary infrastructure backups and provider logs
+          may remain for their limited retention periods. Support correspondence
+          may be kept as needed to resolve requests and meet legal obligations.
+        </li>
+        <li>
+          <strong>No tracking:</strong> We do not sell your data, show ads, use
+          analytics SDKs, or track you across other companies’ apps and
+          websites.
+        </li>
+        <li>
+          <strong>Age:</strong> AI creation is for users who declare they are at
+          least 18. We do not knowingly collect personal information from
+          children.
+        </li>
+      </ul>
+      <p>
+        Service providers: <a href="https://supabase.com/privacy">Supabase</a>,
+        <a href="https://railway.com/legal/privacy">Railway</a>,
+        <a href="https://www.anthropic.com/legal/privacy">Anthropic</a>, and
+        Apple. These providers process data to deliver their services under
+        their applicable privacy and security terms.
+      </p>
+      <h2 id="terms">Use responsibly</h2>
+      <p>
+        Create your own private apps. Do not use Anything App to generate
+        abusive, exploitative, illegal, or infringing content. AI output can be
+        wrong; do not rely on it for medical, legal, financial, or
+        safety-critical decisions. Generated apps are web mini apps, not
+        independently installed native apps. There is no public feed or
+        user-to-user messaging.
+      </p>
+      <footer>
+        © 2026 Jake Johnson · Anything App ·
+        <a href="https://github.com/for-real-labs/anything-app">Source code</a>
+      </footer>
+    </main>
+  </body>
+</html>

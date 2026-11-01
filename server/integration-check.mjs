@@ -61,7 +61,7 @@ try {
   assert.equal((await call(nonApple, "/me")).status, 401);
   console.log("PASS unauthenticated and non-Apple rejection");
   const account = await call(user, "/me");
-  await call(user, "/account/age", {adult:true});
+  await call(user, "/account/age", { adult: true });
   assert.equal(account.data.credits, 10, JSON.stringify(account));
   const jid = crypto.randomUUID();
   const reserve = await admin.rpc("reserve_app_job", {

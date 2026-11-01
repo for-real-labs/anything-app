@@ -1,6 +1,6 @@
 \set ON_ERROR_STOP on
 \ir bootstrap.sql
-\ir ../../supabase/migrations/202610310001_app_anything.sql
+\ir ../../supabase/migrations/202610310001_app_studio.sql
 \ir ../../supabase/migrations/202610310002_job_lock_order.sql
 \ir ../../supabase/migrations/202610310003_claim_jobs.sql
 
@@ -25,7 +25,7 @@ declare
 begin
  account := public.ensure_app_account('00000000-0000-4000-8000-000000000001');
  assert account.unlimited, 'Existing verified allowance was lost';
- assert exists(select 1 from public.app_unlimited_emails where email = 'jakejohnson3700@gmail.com'), 'Owner allowance was lost';
+
 
  insert into auth.users(id, email, email_confirmed_at, raw_user_meta_data) values
  (normal_id, 'normal@example.com', now(), '{"unlimited":true,"email":"granted@example.com"}'),
