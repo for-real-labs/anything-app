@@ -58,7 +58,8 @@ export function AppPlayer({
           source={{ html: document }}
           javaScriptEnabled
           domStorageEnabled
-          scrollEnabled={false}
+          scrollEnabled
+          bounces={false}
           originWhitelist={["*"]}
           onShouldStartLoadWithRequest={(r) =>
             r.url === "about:blank" || r.url === "about:srcdoc"

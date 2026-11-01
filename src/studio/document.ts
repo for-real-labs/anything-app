@@ -38,10 +38,16 @@ export function playerDocument(html: string, data: AppData = {}) {
     const storage={getItem:k=>Object.hasOwn(data,String(k))?data[String(k)]:null,setItem:(k,v)=>{k=String(k);if(k.length>200)throw new Error('Storage key is too long');commit(Object.assign(Object.create(null),data,{[k]:String(v)}))},removeItem:k=>{const next=Object.assign(Object.create(null),data);delete next[String(k)];commit(next)},clear:()=>commit(Object.create(null)),key:i=>Object.keys(data)[i]??null,get length(){return Object.keys(data).length}};
     Object.defineProperty(window,'localStorage',{value:storage});
   })();<\/script>`;
-  const source = (bootstrap + html)
+  // Keep standards mode: a script before the doctype forces quirks mode and
+  // breaks percentage-height flex layouts used by scrolling mini apps.
+  const content = html.replace(/<!doctype[^>]*>/gi, "");
+  const prepared = /<head\b[^>]*>/i.test(content)
+    ? content.replace(/<head\b[^>]*>/i, (head) => head + bootstrap)
+    : bootstrap + content;
+  const source = ("<!doctype html>" + prepared)
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
-  return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body,iframe{margin:0;width:100%;height:100%;border:0;overflow:hidden;background:#F7F8FC}</style></head><body><iframe id="mini" sandbox="allow-scripts allow-pointer-lock" allow="autoplay; fullscreen" srcdoc="${source}"></iframe><script>window.addEventListener('message',e=>{if(e.source!==document.getElementById('mini').contentWindow||e.data?.type!=='anything-storage')return;const message=JSON.stringify(e.data);if(message.length<=200100)window.ReactNativeWebView?.postMessage(message)});<\/script></body></html>`;
+  return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#F7F8FC}iframe{display:block;width:100%;height:100%;border:0;overflow:auto}</style></head><body><iframe id="mini" sandbox="allow-scripts allow-pointer-lock" allow="autoplay; fullscreen" srcdoc="${source}"></iframe><script>window.addEventListener('message',e=>{if(e.source!==document.getElementById('mini').contentWindow||e.data?.type!=='anything-storage')return;const message=JSON.stringify(e.data);if(message.length<=200100)window.ReactNativeWebView?.postMessage(message)});<\/script></body></html>`;
 }

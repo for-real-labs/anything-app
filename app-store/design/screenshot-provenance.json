@@ -1,0 +1,91 @@
+{
+  "method": "Original continuous vector-style wallpaper, original icon, licensed DM Sans, and native iOS captures. No generated or fictional app UI.",
+  "renderer": "scripts/render-store.py",
+  "generationSpendUSD": 0,
+  "panels": [
+    {
+      "output": "app-store/feature-images/iphone/01-home.png",
+      "capture": "app-store/captures/iphone/01-home.png",
+      "crop": [
+        0,
+        180,
+        1320,
+        2550
+      ],
+      "size": [
+        1320,
+        2868
+      ]
+    },
+    {
+      "output": "app-store/feature-images/iphone/02-create.png",
+      "capture": "app-store/captures/iphone/02-create.png",
+      "crop": [
+        0,
+        180,
+        1320,
+        2550
+      ],
+      "size": [
+        1320,
+        2868
+      ]
+    },
+    {
+      "output": "app-store/feature-images/iphone/03-play.png",
+      "capture": "app-store/captures/iphone/03-play.png",
+      "crop": [
+        0,
+        180,
+        1320,
+        2550
+      ],
+      "size": [
+        1320,
+        2868
+      ]
+    },
+    {
+      "output": "app-store/feature-images/ipad/01-home.png",
+      "capture": "app-store/captures/ipad/01-home.png",
+      "crop": [
+        0,
+        45,
+        2064,
+        2480
+      ],
+      "size": [
+        2064,
+        2752
+      ]
+    },
+    {
+      "output": "app-store/feature-images/ipad/02-create.png",
+      "capture": "app-store/captures/ipad/02-create.png",
+      "crop": [
+        0,
+        45,
+        2064,
+        2480
+      ],
+      "size": [
+        2064,
+        2752
+      ]
+    },
+    {
+      "output": "app-store/feature-images/ipad/03-play.png",
+      "capture": "app-store/captures/ipad/03-play.png",
+      "crop": [
+        0,
+        45,
+        2064,
+        1800
+      ],
+      "size": [
+        2064,
+        2752
+      ]
+    }
+  ]
+}

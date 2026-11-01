@@ -27,4 +27,4 @@ The authenticated API exposes `/me`, `/apps`, `/generateApp`, `/jobs`, `/account
 
 `npm run build:ios` and `npm run submit:ios`. Release evidence is in `app-store/`. Uploading is not App Review submission; verify Apple's actual review and TestFlight states.
 
-Artwork is original SVG rendered by `npm run assets`. App Store feature images combine a continuous vector wallpaper with genuine native screenshots using `app-store/design/render.py`.
+Artwork is original SVG rendered by `npm run assets`. App Store feature images combine a continuous vector wallpaper with genuine native screenshots using `scripts/render-store.py` (Python with Pillow).
