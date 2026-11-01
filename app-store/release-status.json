@@ -1,0 +1,33 @@
+{
+  "name": "Anything App: Create with AI",
+  "appleAppId": "6829362322",
+  "appleVersionId": "53125bcb-0639-489f-8dc3-fbd3cc4d3e83",
+  "appleBuildId": "75fbccee-9ebc-4982-89be-d0809d508b15",
+  "buildNumber": "4",
+  "reviewSubmissionId": "0ed05e3f-b91a-418b-bdd9-deba32cc0a85",
+  "reviewStatus": "WAITING_FOR_REVIEW",
+  "status": "WAITING_FOR_REVIEW",
+  "releaseType": "AFTER_APPROVAL",
+  "selectedBuildId": "75fbccee-9ebc-4982-89be-d0809d508b15",
+  "submittedDate": "2026-11-01T03:22:51.008Z",
+  "testflight": {
+    "buildId": "75fbccee-9ebc-4982-89be-d0809d508b15",
+    "buildNumber": "4",
+    "processingState": "VALID",
+    "groupId": "22d08ddf-68ce-4f9a-9725-ad4d212c0b7c",
+    "internalBuildState": "IN_BETA_TESTING",
+    "externalBuildState": "READY_FOR_BETA_SUBMISSION",
+    "testerAssigned": true,
+    "testerState": "INVITED",
+    "checkedAt": "2026-11-01T03:22:01.498Z"
+  },
+  "sourceCommit": "0d5b6a1763263f35f6c28e31fd3ba002f2cc14cd",
+  "easBuildId": "66231c3d-eb4c-44fa-9db2-0db9573e5483",
+  "easSubmissionId": "1d256c23-ed24-45c6-a803-6102f4dc77fc",
+  "github": "https://github.com/for-real-labs/anything-app",
+  "railwayProjectId": "267fdeb8-8b69-4b98-95ab-bf441530a1c7",
+  "railwayServiceId": "14738df9-6610-4cac-9491-a78c5b87f92b",
+  "apiUrl": "https://app-api-production-e73b.up.railway.app",
+  "supabaseProjectId": "hhitfzxzxboakaefgzsv",
+  "artworkGenerationCostUSD": 0
+}

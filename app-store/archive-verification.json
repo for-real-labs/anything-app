@@ -1,0 +1,13 @@
+{
+  "bundleId": "com.forreallabs.anythingapp",
+  "version": "1.0.0",
+  "buildNumber": "4",
+  "deviceFamilies": [
+    1,
+    2
+  ],
+  "archiveSHA256": "7850968f092c4a281cb0c498cd79f61af6e055fffe17952ef8ad3e2a55112290",
+  "bundleSHA256": "38d299b7cfb94e39b4635fd6c9da3228fb6b8a71d72b1e972392ce512fc6b03c",
+  "noQACredentialsInBundle": true,
+  "exactProductionBundleLaunchedInMatchingSimulator": true
+}

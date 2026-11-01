@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-01T03:23:08.600Z",
+  "typecheck": "passed",
+  "unitTests": 7,
+  "serverTests": 3,
+  "sqlCreditAllowanceAndRlsRegression": "passed",
+  "liveGenerationAndRevision": "passed",
+  "nativeDevices": [
+    "iPhone 16 Pro Max, iOS 18.3",
+    "iPad Pro 13-inch, iOS 18.3"
+  ],
+  "nativeFlow": [
+    "create",
+    "preview",
+    "save",
+    "reopen",
+    "revise",
+    "saved-state retention",
+    "cross-device app source sync",
+    "local form data persistence after relaunch",
+    "starter habit persistence",
+    "sign out",
+    "native Apple sign-in sheet"
+  ],
+  "appleSignInLimitation": "The simulator had no Apple Account. Real identity-token round trip was not completed; native capability, Supabase Apple provider, bundle ID and nonce flow were inspected. Authenticated flow used an isolated synthetic test identity, now deleted.",
+  "privacy": "Published: app functionality, linked identity, no tracking",
+  "screenshots": {
+    "iphone": 3,
+    "ipad": 3,
+    "deliveryState": "COMPLETE"
+  },
+  "priceUSD": 0,
+  "testAccountRemoved": true,
+  "temporarySecretsRemoved": true
+}

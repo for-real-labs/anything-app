@@ -10,4 +10,4 @@ Automated checks: TypeScript, seven storage/sandbox tests, three generator/auth 
 
 App Store assets: three continuous panels per device, genuine simulator captures, original SVG icon and wallpaper, licensed DM Sans. See `design/screenshot-provenance.json`. No image-generation spend. Privacy disclosures are published and cover linked email, user ID, app prompts/code, support reports, and usage necessary for credits; no tracking. App is free, rated 18+, with 10 creation/revision credits per new account.
 
-Final Apple processing, TestFlight, and App Review evidence is recorded in `release-status.json` after verification.
+Production build 4 passed Apple processing and is IN_BETA_TESTING for Jake’s internal Team group. Version 1.0.0 is WAITING_FOR_REVIEW, with automatic release after approval. The exact production Hermes bundle was also launched in the matching simulator binary. See `release-status.json`, `validation.json`, and `archive-verification.json`.
